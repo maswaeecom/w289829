@@ -972,7 +972,7 @@ def sendresult99(period, lottotype, type):
 
 
 
-def addlotteryadmin(request):
+def addlotteryadmin():
     lastlottery = newlotteries.objects.count()
   
     
@@ -1014,7 +1014,7 @@ def addlotteryadmin(request):
     return HttpResponse("Error")
 
 
-def addlotteryadmin3m(request):
+def addlotteryadmin3m():
     lastlottery = newlotteriesthreem.objects.count()
     # print(lastlottery)
     
@@ -1051,7 +1051,7 @@ def addlotteryadmin3m(request):
     
     return HttpResponse("Error")
 
-def addlotteryadmin99(request):
+def addlotteryadmin99():
     lastlottery = newlotteriesnine.objects.count()
     print(lastlottery)
     

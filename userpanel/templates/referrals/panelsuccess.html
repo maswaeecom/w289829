@@ -1,0 +1,33 @@
+
+{% load static %}
+{% block content %}
+{% include "includes/header.html" %}
+<div class="main-panel">
+    <div class="content-wrapper">
+        
+        <div class="row">
+            <div class="content-wrapper full-page-wrapper d-flex align-items-center auth">
+                <div class="card col-lg-6 mx-auto">
+                  <div class="card-body px-5 py-5">
+                    <h3 class="card-title text-left mb-3 text-center">Registration Successful</h3>
+                
+    
+                      <p style="color: white;"><br/>
+                        Congratulation user created Successfully. Below are the details of user</p><br>
+                        <h4><strong>User ID :</strong> {{ username }}</h4>
+                       <h4> <strong>Sponsor :</strong> {{ sponsor }}</h4>
+                  
+                  
+                    
+                  </div>
+                </div>
+              </div>
+            <!-- content-wrapper ends -->
+          </div>
+    </div>
+    </div>
+    
+
+{% include "includes/footer.html" %}
+
+{% endblock %}

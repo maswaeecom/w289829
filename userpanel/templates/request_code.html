@@ -1,0 +1,83 @@
+
+{% load static %}
+{% block content %}
+{% include "includes/header.html" %}
+<div class="main-panel">
+    <div class="content-wrapper">
+      <div class="page-header">
+        <h3 class="page-title"> Request Chips </h3>
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Request Chips</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+          </ol>
+        </nav>
+      </div>
+      <div class="row">
+        
+        <div class="col-md-6 grid-margin stretch-card text-center">
+            <div class="card">
+              <div class="card-body">
+                <div class="card card-info bg-danger-gradient">
+                    <div class="card-body">
+                        <h4 class="mb-1 fw-bold">USDT Address</h4>
+                        <img src="{% static '/member/assets/img/qr.jpg' %}" class="img-fluid animated" alt="" width="200px" height="200px">
+                        <div id="task-complte"><br>
+                            <h4>JSHYWRTshsjhjh&^762762878Skskjskjskw8782j</h4>
+                        </div>
+                    </div>
+                </div>
+               
+              </div>
+            </div>
+          </div>
+
+
+        <div class="col-md-6 grid-margin stretch-card">
+          <div class="card">
+            <form method="POST" action="request_chips">
+              {% csrf_token %}
+            <div class="card-body">
+              <h4 class="card-title">Send Crypto Transaction Hash</h4>
+              {% if messages %}
+              {% for message in messages %}
+              <div  {% if message.tags %} class=" {{ message.tags }} " {% endif %} role="alert"> {{ message }} </div>
+              <br>
+              {% endfor %}                            
+          {% endif %}
+              <div class="form-group">
+                <label>User Type</label>
+                <select class="js-example-basic-single" style="width:100%" name="type" style="color: white;">
+                  <option value="USDT">USDT</option>
+                  <option value="BUSD">BUSD</option>
+                 </select>
+              </div>
+              <div class="form-group">
+                <label>Please Enter Amount</label>
+                <input type="number" name="amount" class="form-control todo-list-input" placeholder="enter amount" style="color: white;">
+              </div>
+
+
+              <div class="form-group">
+                <label>Please Enter Hash</label>
+                <input type="text" name="hash" class="form-control todo-list-input" placeholder="enter hash" style="color: white;">
+              </div>
+
+              
+              <div class="add-items d-flex">
+               
+                <input type="submit" class="add btn btn-primary too-list-add-btn" value="Send Request">
+              </div>
+            </div>
+            </form>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    </div>
+    
+
+{% include "includes/footer.html" %}
+
+{% endblock %}

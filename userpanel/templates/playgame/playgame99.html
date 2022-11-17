@@ -1,0 +1,934 @@
+{% load static %}
+{% block content %}
+{% include "includes/header.html" %}
+
+<div class="main-panel">
+    <div class="content-wrapper customdiv">
+      <div class="container-fluid" style="background-color: #323232; border:1px solid goldenrod; border-radius: 5px; ">
+       
+        <div class="row">        
+          <div class="col-4">
+            <div class=" text-left"><p style="font-size: 25px; font-weight: bold; color:goldenrod">Period</p><p id="periodid" style="font-size: 23px;"></p></div>
+            <input type="hidden" id="mint" value="">
+            <input type="hidden" id="seconds" value="">
+            <input type="hidden" id="getbalance" value="{{ wallet.balance }}">
+            <input type="hidden" id="username" value="{{ request.user }}">
+            <input type="hidden" id="userid" value="{{ request.user.id }}">
+            <input type="hidden" id="timing" value="10">
+            <div class="countdown">
+              <div id='tiles'>
+                
+              </div>
+              
+            </div> 
+          </div>
+          <div class="col-4">
+            <div class="p-2" style="float: right;"><a href="mybets"><img src="{% static 'game/img/mybets.png' %}" alt="bets" class="img-fluid" style="height: 20px;"></a></div>
+            <div style="height: 80px;" ></div>
+            <div id="ballstand" class="d-flex align-items-center justify-content-end mt-4" style="height: 38px; width: 95px; float: right;">
+            <div id="resb" style="margin-right: 21px;margin-bottom: 24px; height: 50px; width: 50px;">
+              <p id="result99" style="margin-left:15px; color:black; font-size:13px; margin-top:12px; "></p>
+              <!-- <img id="resultball"  src="" style="width: 40px; margin-right: 8px; margin-bottom: 23px;"/> -->
+            </div>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="p-2" id="help"><img src="{% static 'game/img/help.png' %}" alt="bets" class="img-fluid shdow-lg" style="height: 20px;"></div>
+            <div id="box" class="p-3 parent" style="height: 110px; width: 90px; float: left;">
+              
+            
+              <div id="boxball1" class="child1 text-right p-1 ml-5" style="height: 20px; width: 20px;">
+               
+              </div>
+              
+              
+              <div id="boxball2" class="child2 text-right p-2 ml-3" style="height: 20px; width: 20px; margin-left:20px">
+               
+              </div>
+              <div id="boxball3" class="child3 text-right p-2 ml-3" style="height: 20px; width: 20px; margin-top:20px">
+               
+              </div>
+              <div id="boxball4" class="child4 text-right p-2 ml-3 mb-2" style="height: 20px; width: 20px; margin-top:15px; margin-left:40px;">
+               
+              </div>
+              <div id="boxball1" class="child5 text-right p-2 ml-5" style="height: 20px; width: 20px; margin-top:-50px; margin-left:40px">
+               
+              </div>
+
+              <div id="boxball1" class="child20 text-right p-2" style="height: 20px; width: 20px; margin-top:-60px; margin-left:20px">
+               
+              </div>
+              <div id="boxball4" class="child21 text-right p-2 ml-3 mb-2" style="height: 20px; width: 20px; margin-top:-50px; margin-left:10px;">
+               
+              </div>
+
+              <div id="boxball2" class="child22 text-right p-2 ml-3" style="height: 20px; width: 20px; margin-left:20px">
+               
+              </div>
+
+             
+
+              
+              
+
+              <div id="boxball7" class="child7 text-right " style="height: 20px; width: 20px; margin-top:-28px; margin-left:45px">
+               
+              </div>
+
+
+
+              <div id="resb"><img class="resultballsmall" id="resultballsmall"  src="" style="width: 18px; margin-left: 10px; margin-top: 60px;"/></div>
+            </div>
+          </div>
+          </div>
+
+          <div class="row">        
+            <div class="col-4 btncontent">
+              <div id="joireen" class="even alleven p-2 d-flex align-items-center justify-content-center mt-1" style="background-color: #244e2c; height: 42px; border-radius: 3px; color:#C0C0C0; font-size: 18px;">Even</div>
+            </div>
+            <div class="col-4">
+             
+            </div>
+            <div class="col-4 btncontent">
+              <div id="joireen" class="odd allodd p-2 d-flex align-items-center justify-content-center mt-1" style="background-color: #651718;  height: 42px; border-radius: 3px; color:#C0C0C0">Odd</div> 
+            
+            </div>
+            </div>
+         
+
+            <div class="row g-1">         
+              <div class="col btncontent"> 
+                <div id="joireen" class="alleven p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #244e2c; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">0
+                </div>               
+              </div>
+              <div class="col btncontent">
+                <div id="joireen" class="allodd p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #651718; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">1
+                </div>
+              </div>
+
+              <div class="col btncontent"> 
+                <div id="joireen" class="alleven p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #244e2c; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">2
+                </div>               
+              </div>
+              <div class="col btncontent">
+                <div id="joireen" class="allodd p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #651718; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">3
+                </div>
+              </div>
+
+
+
+              <div class="col btncontent"> 
+                <div id="joireen" class="alleven p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #244e2c; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">4
+                </div>               
+              </div>
+              <div class="col btncontent">
+                <div id="joireen" class="allodd p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #651718; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">5
+                </div>
+              </div>
+
+              <div class="col btncontent"> 
+                <div id="joireen" class="alleven p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #244e2c; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">6
+                </div>               
+              </div>
+              <div class="col btncontent">
+                <div id="joireen" class="allodd p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #651718; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">7
+                </div>
+              </div>
+
+              <div class="col btncontent"> 
+                <div id="joireen" class="alleven p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #244e2c; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">8
+                </div>               
+              </div>
+              <div class="col btncontent">
+                <div id="joireen" class="allodd p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #651718; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">9
+                </div>
+              </div>
+              
+              </div>
+
+
+              <div class="row g-1">         
+                <div class="col btncontent"> 
+                  <div id="joireen" class="alleven p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #244e2c; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">10
+                  </div>               
+                </div>
+                <div class="col btncontent">
+                  <div id="joireen" class="allodd p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #651718; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">11
+                  </div>
+                </div>
+  
+                <div class="col btncontent"> 
+                  <div id="joireen" class="alleven p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #244e2c; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">12
+                  </div>               
+                </div>
+                <div class="col btncontent">
+                  <div id="joireen" class="allodd p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #651718; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">13
+                  </div>
+                </div>
+  
+  
+  
+                <div class="col btncontent"> 
+                  <div id="joireen" class="alleven p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #244e2c; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">14
+                  </div>               
+                </div>
+                <div class="col btncontent">
+                  <div id="joireen" class="allodd p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #651718; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">15
+                  </div>
+                </div>
+  
+                <div class="col btncontent"> 
+                  <div id="joireen" class="alleven p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #244e2c; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">16
+                  </div>               
+                </div>
+                <div class="col btncontent">
+                  <div id="joireen" class="allodd p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #651718; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">17
+                  </div>
+                </div>
+  
+                <div class="col btncontent"> 
+                  <div id="joireen" class="alleven p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #244e2c; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">18
+                  </div>               
+                </div>
+                <div class="col btncontent">
+                  <div id="joireen" class="allodd p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #651718; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">19
+                  </div>
+                </div>
+                
+                </div>
+
+
+
+                <div class="row g-1">         
+                  <div class="col btncontent"> 
+                    <div id="joireen" class="alleven p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #244e2c; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">20
+                    </div>               
+                  </div>
+                  <div class="col btncontent">
+                    <div id="joireen" class="allodd p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #651718; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">21
+                    </div>
+                  </div>
+    
+                  <div class="col btncontent"> 
+                    <div id="joireen" class="alleven p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #244e2c; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">22
+                    </div>                
+                  </div>
+                  <div class="col btncontent">
+                    <div id="joireen" class="allodd p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #651718; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">23
+                    </div>
+                  </div>
+    
+    
+    
+                  <div class="col btncontent"> 
+                    <div id="joireen" class="alleven p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #244e2c; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">24
+                    </div>               
+                  </div>
+                  <div class="col btncontent">
+                    <div id="joireen" class="allodd p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #651718; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">25
+                    </div>
+                  </div>
+    
+                  <div class="col btncontent"> 
+                    <div id="joireen" class="alleven p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #244e2c; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">26
+                    </div>               
+                  </div>
+                  <div class="col btncontent">
+                    <div id="joireen" class="allodd p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #651718; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">27
+                    </div>
+                  </div>
+    
+                  <div class="col btncontent"> 
+                    <div id="joireen" class="alleven p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #244e2c; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">28
+                    </div>               
+                  </div>
+                  <div class="col btncontent">
+                    <div id="joireen" class="allodd p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #651718; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">29
+                    </div>
+                  </div>
+                  
+                  </div>
+
+
+
+                  <div class="row g-1">         
+                    <div class="col btncontent"> 
+                      <div id="joireen" class="alleven p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #244e2c; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">30
+                      </div>               
+                    </div>
+                    <div class="col btncontent">
+                      <div id="joireen" class="allodd p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #651718; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">31
+                      </div>
+                    </div>
+      
+                    <div class="col btncontent"> 
+                      <div id="joireen" class="alleven p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #244e2c; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">32
+                      </div>               
+                    </div>
+                    <div class="col btncontent">
+                      <div id="joireen" class="allodd p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #651718; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">33
+                      </div>
+                    </div>
+      
+      
+      
+                    <div class="col btncontent"> 
+                      <div id="joireen" class="alleven p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #244e2c; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">34
+                      </div>               
+                    </div>
+                    <div class="col btncontent">
+                      <div id="joireen" class="allodd p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #651718; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">35
+                      </div>
+                    </div>
+      
+                    <div class="col btncontent"> 
+                      <div id="joireen" class="alleven p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #244e2c; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">36
+                      </div>               
+                    </div>
+                    <div class="col btncontent">
+                      <div id="joireen" class="allodd p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #651718; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">37
+                      </div>
+                    </div>
+      
+                    <div class="col btncontent"> 
+                      <div id="joireen" class="alleven p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #244e2c; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">38
+                      </div>               
+                    </div>
+                    <div class="col btncontent">
+                      <div id="joireen" class="allodd p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #651718; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">39
+                      </div>
+                    </div>
+                    
+                    </div>
+
+
+
+                    <div class="row g-1">         
+                      <div class="col btncontent"> 
+                        <div id="joireen" class="alleven p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #244e2c; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">40
+                        </div>               
+                      </div>
+                      <div class="col btncontent">
+                        <div id="joireen" class="allodd p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #651718; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">41
+                        </div>
+                      </div>
+        
+                      <div class="col btncontent"> 
+                        <div id="joireen" class="alleven p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #244e2c; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">42
+                        </div>               
+                      </div>
+                      <div class="col btncontent">
+                        <div id="joireen" class="allodd p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #651718; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">43
+                        </div>
+                      </div>
+        
+        
+        
+                      <div class="col btncontent"> 
+                        <div id="joireen" class="alleven p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #244e2c; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">44
+                        </div>               
+                      </div>
+                      <div class="col btncontent">
+                        <div id="joireen" class="allodd p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #651718; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">45
+                        </div>
+                      </div>
+        
+                      <div class="col btncontent"> 
+                        <div id="joireen" class="alleven p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #244e2c; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">46
+                        </div>               
+                      </div>
+                      <div class="col btncontent">
+                        <div id="joireen" class="allodd p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #651718; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">47
+                        </div>
+                      </div>
+        
+                      <div class="col btncontent"> 
+                        <div id="joireen" class="alleven p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #244e2c; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">48
+                        </div>               
+                      </div>
+                      <div class="col btncontent">
+                        <div id="joireen" class="allodd p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #651718; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">49
+                        </div>
+                      </div>
+                      
+                      </div>
+
+
+
+                      <div class="row g-1">         
+                        <div class="col btncontent"> 
+                          <div id="joireen" class="alleven p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #244e2c; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">50
+                          </div>               
+                        </div>
+                        <div class="col btncontent">
+                          <div id="joireen" class="allodd p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #651718; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">51
+                          </div>
+                        </div>
+          
+                        <div class="col btncontent"> 
+                          <div id="joireen" class="alleven p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #244e2c; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">52
+                          </div>               
+                        </div>
+                        <div class="col btncontent">
+                          <div id="joireen" class="allodd p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #651718; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">53
+                          </div>
+                        </div>
+          
+          
+          
+                        <div class="col btncontent"> 
+                          <div id="joireen" class="alleven p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #244e2c; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">54
+                          </div>               
+                        </div>
+                        <div class="col btncontent">
+                          <div id="joireen" class="allodd p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #651718; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">55
+                          </div>
+                        </div>
+          
+                        <div class="col btncontent"> 
+                          <div id="joireen" class="alleven p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #244e2c; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">56
+                          </div>               
+                        </div>
+                        <div class="col btncontent">
+                          <div id="joireen" class="allodd p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #651718; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">57
+                          </div>
+                        </div>
+          
+                        <div class="col btncontent"> 
+                          <div id="joireen" class="alleven p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #244e2c; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">58
+                          </div>               
+                        </div>
+                        <div class="col btncontent">
+                          <div id="joireen" class="allodd p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #651718; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">59
+                          </div>
+                        </div>
+                        
+                        </div>
+
+
+                        <div class="row g-1">         
+                          <div class="col btncontent"> 
+                            <div id="joireen" class="alleven p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #244e2c; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">60
+                            </div>               
+                          </div>
+                          <div class="col btncontent">
+                            <div id="joireen" class="allodd p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #651718; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">61
+                            </div>
+                          </div>
+            
+                          <div class="col btncontent"> 
+                            <div id="joireen" class="alleven p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #244e2c; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">62
+                            </div>               
+                          </div>
+                          <div class="col btncontent">
+                            <div id="joireen" class="allodd p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #651718; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">63
+                            </div>
+                          </div>
+            
+            
+            
+                          <div class="col btncontent"> 
+                            <div id="joireen" class="alleven p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #244e2c; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">64
+                            </div>               
+                          </div>
+                          <div class="col btncontent">
+                            <div id="joireen" class="allodd p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #651718; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">65
+                            </div>
+                          </div>
+            
+                          <div class="col btncontent"> 
+                            <div id="joireen" class="alleven p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #244e2c; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">66
+                            </div>               
+                          </div>
+                          <div class="col btncontent">
+                            <div id="joireen" class="allodd p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #651718; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">67
+                            </div>
+                          </div>
+            
+                          <div class="col btncontent"> 
+                            <div id="joireen" class="alleven p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #244e2c; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">68
+                            </div>               
+                          </div>
+                          <div class="col btncontent">
+                            <div id="joireen" class="allodd p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #651718; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">69
+                            </div>
+                          </div>
+                          
+                          </div>
+
+
+
+                          <div class="row g-1">         
+                            <div class="col btncontent"> 
+                              <div id="joireen" class="alleven p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #244e2c; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">70
+                              </div>               
+                            </div>
+                            <div class="col btncontent">
+                              <div id="joireen" class="allodd p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #651718; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">71
+                              </div>
+                            </div>
+              
+                            <div class="col btncontent"> 
+                              <div id="joireen" class="alleven p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #244e2c; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">72
+                              </div>               
+                            </div>
+                            <div class="col btncontent">
+                              <div id="joireen" class="allodd p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #651718; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">73
+                              </div>
+                            </div>
+              
+              
+              
+                            <div class="col btncontent"> 
+                              <div id="joireen" class="alleven p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #244e2c; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">74
+                              </div>               
+                            </div>
+                            <div class="col btncontent">
+                              <div id="joireen" class="allodd p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #651718; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">75
+                              </div>
+                            </div>
+              
+                            <div class="col btncontent"> 
+                              <div id="joireen" class="alleven p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #244e2c; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">76
+                              </div>               
+                            </div>
+                            <div class="col btncontent">
+                              <div id="joireen" class="allodd p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #651718; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">77
+                              </div>
+                            </div>
+              
+                            <div class="col btncontent"> 
+                              <div id="joireen" class="alleven p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #244e2c; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">78
+                              </div>               
+                            </div>
+                            <div class="col btncontent">
+                              <div id="joireen" class="allodd p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #651718; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">79
+                              </div>
+                            </div>
+                            
+                            </div>
+
+
+                            <div class="row g-1">         
+                              <div class="col btncontent"> 
+                                <div id="joireen" class="alleven p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #244e2c; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">80
+                                </div>               
+                              </div>
+                              <div class="col btncontent">
+                                <div id="joireen" class="allodd p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #651718; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">81
+                                </div>
+                              </div>
+                
+                              <div class="col btncontent"> 
+                                <div id="joireen" class="alleven p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #244e2c; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">82
+                                </div>               
+                              </div>
+                              <div class="col btncontent">
+                                <div id="joireen" class="allodd p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #651718; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">83
+                                </div>
+                              </div>
+                
+                
+                
+                              <div class="col btncontent"> 
+                                <div id="joireen" class="alleven p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #244e2c; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">84
+                                </div>               
+                              </div>
+                              <div class="col btncontent">
+                                <div id="joireen" class="allodd p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #651718; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">85
+                                </div>
+                              </div>
+                
+                              <div class="col btncontent"> 
+                                <div id="joireen" class="alleven p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #244e2c; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">86
+                                </div>               
+                              </div>
+                              <div class="col btncontent">
+                                <div id="joireen" class="allodd p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #651718; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">87
+                                </div>
+                              </div>
+                
+                              <div class="col btncontent"> 
+                                <div id="joireen" class="alleven p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #244e2c; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">88
+                                </div>               
+                              </div>
+                              <div class="col btncontent">
+                                <div id="joireen" class="allodd p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #651718; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">89
+                                </div>
+                              </div>
+                              
+                              </div>
+
+
+
+                              <div class="row g-1">         
+                                <div class="col btncontent"> 
+                                  <div id="joireen" class="alleven p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #244e2c; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">90
+                                  </div>               
+                                </div>
+                                <div class="col btncontent">
+                                  <div id="joireen" class="allodd p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #651718; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">91
+                                  </div>
+                                </div>
+                  
+                                <div class="col btncontent"> 
+                                  <div id="joireen" class="alleven p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #244e2c; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">92
+                                  </div>               
+                                </div>
+                                <div class="col btncontent">
+                                  <div id="joireen" class="allodd p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #651718; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">93
+                                  </div>
+                                </div>
+                  
+                  
+                  
+                                <div class="col btncontent"> 
+                                  <div id="joireen" class="alleven p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #244e2c; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">94
+                                  </div>               
+                                </div>
+                                <div class="col btncontent">
+                                  <div id="joireen" class="allodd p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #651718; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">95
+                                  </div>
+                                </div>
+                  
+                                <div class="col btncontent"> 
+                                  <div id="joireen" class="alleven p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #244e2c; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">96
+                                  </div>               
+                                </div>
+                                <div class="col btncontent">
+                                  <div id="joireen" class="allodd p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #651718; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">97
+                                  </div>
+                                </div>
+                  
+                                <div class="col btncontent"> 
+                                  <div id="joireen" class="alleven p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #244e2c; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">98
+                                  </div>               
+                                </div>
+                                <div class="col btncontent">
+                                  <div id="joireen" class="allodd p-2 d-flex align-items-center justify-content-center mt-2" style="background-color: #651718; width:100%; border-radius: 3px; color:#C0C0C0; font-size: 10px;">99
+                                  </div>
+                                </div>
+                                
+                                </div>
+
+                                <br>
+
+
+                                <div class="table-responsive" id="mytable">
+                  
+                                </div> 
+                
+
+
+                                <div id="mymodal" class="modal fade" id="exampleModalCenter" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true" style="font-size: 10px;">
+                                  <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content" style="background-color: #1a1a1a;">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">Bet Slip</h5>
+                                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                      </div>
+                                      <div class="modal-body">
+                                        <div class="row g-1">
+                                          <div class="col">
+                                            <p id="availablebalance"></p>
+                                          </div>
+                                          </div>
+                                        <div class="row g-1">
+                                          <div class="col">
+                                            <button type="button" class="betamount btn btn-warning btn-icon-text">10</button>
+                                          </div>
+                                          <div class="col">
+                                            <button type="button" class="betamount btn btn-warning btn-icon-text">50</button>
+                                          </div>
+                
+                
+                                          <div class="col">
+                                            <button type="button" class="betamount btn btn-warning btn-icon-text">100</button>
+                                          </div>
+                
+                
+                
+                                          <div class="col">
+                                            <button type="button" class="betamount btn btn-warning btn-icon-text">500</button>
+                                          </div>
+                
+                                          <div class="col">
+                                            <button type="button" class="betamount btn btn-warning btn-icon-text">1000</button>
+                                          </div>
+                                          
+                
+                                          <!-- <div class="col">
+                                            <input type="number" class="form-control" style="color:white; height: calc(1.8rem + 2px);" id="totalchips"></p>
+                                          </div> -->
+                
+                
+                                        </div>
+
+                                        <br>
+                                        <div class="row g-1">
+                                          <div class="col-6">
+                                            <input type="number" class="form-control" style="color:white; height: calc(1.8rem + 2px);" id="totalchips"></p>
+                                          </div>
+                                            </div>
+                
+                
+                
+                                        
+                
+                                        
+                                        <p id="selectednumber"></p>
+                                        <input type="hidden" id="selectedbetnumber" value="">
+                                        
+                                        <!-- <button type="button" class="betamount btn btn-warning btn-icon-text">10</button>
+                                        <button type="button" class="betamount btn btn-warning btn-icon-text">50</button>
+                                        <button type="button" class="betamount btn btn-warning btn-icon-text">100</button>
+                                      
+                                        <button type="button" class="betamount btn btn-warning btn-icon-text">500</button>
+                                        <button type="button" class="betamount btn btn-warning btn-icon-text">1000</button>
+                                        <button type="button" class="betamount btn btn-warning btn-icon-text">2000</button>
+                                
+                                        <br><br> -->
+                                        <p id="selectednumber"></p>
+                                        <input type="hidden" id="selectedbetnumber" value="">
+                                        <!-- <input type="number" class="form-control" style="color:white;" id="totalchips"></p> -->
+                                        <!-- <p id="totalchips" value="0"></p> -->
+                                        <input type="hidden" id="totalbetamount" value="">
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button id="placebetbtn" type="button" class="btn btn-primary">Place Bet</button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                                <div id="balancemodal" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog modal-dialog-centered modal-sm">
+                                    <div class="modal-content" style="background-color: #1a1a1a;">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">Low Balance</h5>
+                                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                      </div>
+                                      <div class="modal-body">
+                                        
+                                      <h1>! Insufficient Chips</h1>
+                                     
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                       
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                
+                
+                
+
+
+
+
+                                <div id="timemodal" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog modal-dialog-centered modal-sm">
+                                    <div class="modal-content" style="background-color: #1a1a1a;">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">Low Balance</h5>
+                                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                      </div>
+                                      <div class="modal-body">
+                                        
+                                      <h3>Sorry! You can not place bet in last 30 seconds</h3>
+                                     
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                       
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+
+
+
+
+
+
+
+                                <div id="10multiple99" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog modal-dialog-centered modal-sm">
+                                    <div class="modal-content" style="background-color: #1a1a1a;">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">Invalid</h5>
+                                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                      </div>
+                                      <div class="modal-body">
+                                        
+                                      <h3>Please enter the amount that multiple to 50.</h3>
+                                     
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                       
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+
+
+
+
+                
+                                <div id="betplaced" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog modal-dialog-centered modal-sm">
+                                    <div class="modal-content" style="background-color: #1a1a1a;">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">Success</h5>
+                                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                      </div>
+                                      <div class="modal-body">
+                                        <div class="text-center">
+                                          <span class="menu-icon">
+                                            <i class="mdi mdi-coin"></i>
+                                          </span>
+                                        </div>
+                                        <div class="text-center">
+                                      <h1>Bet Placed</h1>
+                                      </div>
+                                     
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                       
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+
+
+
+
+
+
+
+
+                                <div id="helpmodal" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog modal-dialog-centered modal-sm">
+                                    <div class="modal-content" style="background-color: #1a1a1a;">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">Winzlotto Rules</h5>
+                                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                      </div>
+                                      <div class="modal-body">
+                                        
+                                      <p>1. 9 minutes and 30
+                                        seconds to order, 30
+                                        seconds to show the
+                                        game result. It opens
+                                        24/7 all days. The total 
+                                        number of trade is 144
+                                        games.</p>
+                
+                
+                                        <p>2. If you are spending to
+                                          play a games, there is
+                                          no deduction of any
+                                          type of fee.</p>
+                
+                                          <p>3. If the player chooses
+                                            EVEN (Green), and
+                                            spends 500 chips, if
+                                            the result of the game
+                                            is.
+                                           0,2,4,6,8,10,12,14,16,18
+                                           ect.. 
+                                           you will get 900 chips.</p>
+                                            <p>4. If a player chooses
+                                              ODD (Red), and spends
+                                              500 chips, if the result
+                                              of the game is
+                                              1,3,5,7,9,11,13,15,17,19
+                                               ect...
+                                              you will get 900 chips.</p>
+                                              <p>5. If the player chooses
+                                                any number And the
+                                                result of the game is
+                                                same, the player will
+                                                win (100*90) 
+                                                9000 chips.</p>
+                                     
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                       
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                
+                
+
+                                <br>
+
+                
+             </div> 
+             
+                  </div>
+
+                  
+ 
+    </div>
+    
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    
+    
+    
+    <script src="{% static 'assets/vendors/js/vendor.bundle.base.js' %}"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="{% static 'assets/vendors/chart.js/Chart.min.js' %}"></script>
+    <script src="{% static 'assets/vendors/progressbar.js/progressbar.min.js' %}"></script>
+    <script src="{% static 'assets/vendors/jvectormap/jquery-jvectormap.min.js' %}"></script>
+    <script src="{% static 'assets/vendors/jvectormap/jquery-jvectormap-world-mill-en.js' %}"></script>
+    <script src="{% static 'assets/vendors/owl-carousel-2/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.cookie.js' %}" type="text/javascript"></script>
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="{% static 'assets/js/off-canvas.js' %}"></script>
+    <script src="{% static 'assets/js/hoverable-collapse.js' %}"></script>
+    <script src="{% static 'assets/js/misc.js' %}"></script>
+    <script src="{% static 'assets/js/settings.js' %}"></script>
+    <script src="{% static 'assets/js/todolist.js' %}"></script>
+    <script src="{% static 'assets/vendors/select2/select2.min.js' %}"></script>
+    <script src="{% static 'assets/js/select2.js' %}"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    <script src="{% static 'assets/js/dashboard.js' %}"></script>
+    <script src="{% static 'game/js/custom99.js' %}"></script>
+    
+    
+    </body>
+    </html>
+
+{% endblock %}

@@ -1,0 +1,96 @@
+
+{% load static %}
+{% block content %}
+{% include "includes/header.html" %}
+<div class="main-panel">
+    <div class="content-wrapper">
+      <div class="page-header">
+        <h3 class="page-title"> Accounting Detail </h3>
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Wallet</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+          </ol>
+          
+        </nav>
+      
+      </div>
+      <div>
+        {% if messages %}
+              {% for message in messages %}
+              <div  {% if message.tags %} class=" {{ message.tags }} " {% endif %} role="alert"> {{ message }} </div>
+              <br>
+              {% endfor %}                            
+          {% endif %}
+      </div>
+      <div class="row">
+        
+        <div class="col-md-6 grid-margin stretch-card text-center">
+            <div class="card">
+              <div class="card-body">
+                <div class="card card-info bg-danger-gradient">
+                    <div class="card-body">
+ 
+                        <i class="mdi mdi mdi-wallet mdi-48px"></i>
+                        <h4 class="mb-1 fw-bold">{{ wallet.balance }}</h4>
+                        <h4 class="mb-1 fw-bold">Available Chips</h4>
+                        
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                    Total Placed Bets
+                    </div>
+                    <div class="col-md-6">
+                    {{ bets }}
+                    </div>
+                </div>
+               <hr>
+               <div class="row">
+                <div class="col-md-6">
+                Total Amount 
+                </div>
+                <div class="col-md-6">
+                {{ totalbetsamount }}
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-6">
+                Total Winning Bets 
+                </div>
+                <div class="col-md-6">
+                {{ winning }}
+                </div>
+            </div>
+
+
+            <hr>
+            <div class="row">
+                <div class="col-md-6">
+                Total Lost Bets 
+                </div>
+                <div class="col-md-6">
+                {{ lost }}
+                </div>
+            </div>
+     
+
+
+
+
+              </div>
+            </div>
+          </div>
+
+
+        
+      </div>
+    </div>
+    </div>
+    
+
+{% include "includes/footer.html" %}
+
+{% endblock %}

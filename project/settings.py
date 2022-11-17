@@ -187,5 +187,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CRONJOBS = [
     ('*/3 * * * *', 'userpanel.cron.addlottery3m'),
     ('*/15 * * * *', 'userpanel.cron.addlottery15m'),
-    ('0 * * * *', 'userpanel.cron.addlottery99'),
+    ('*/10 * * * *', 'userpanel.cron.addlottery99'),
 ]
